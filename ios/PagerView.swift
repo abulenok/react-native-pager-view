@@ -77,6 +77,12 @@ struct PagerView: View {
           scrollDelegate.orientation = .horizontal
           collectionView.delegate = scrollDelegate
         }
+
+        // React Native scroll views hand touches to their content immediately
+        // (RCTScrollView sets delaysContentTouches = NO) and the UIKit pager in
+        // 6.x did the same for its page scroll view. UICollectionView defaults
+        // to YES, which delays press feedback inside every page.
+        collectionView.delaysContentTouches = false
       }
     }
     // GeometryReader is the root since the vertical layout; without this it
